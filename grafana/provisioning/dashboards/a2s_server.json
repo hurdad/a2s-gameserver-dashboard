@@ -67,10 +67,7 @@
       "type": "text"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -117,10 +114,8 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
+
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -139,10 +134,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -186,10 +178,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -208,10 +197,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -254,10 +240,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -276,10 +259,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -329,10 +309,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -351,10 +328,7 @@
       "type": "table"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -401,10 +375,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -423,10 +394,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "fc15493b-5142-4b3f-a137-31dd28b7b6c1"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -472,10 +440,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "fc15493b-5142-4b3f-a137-31dd28b7b6c1"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -494,10 +459,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -544,10 +506,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -566,10 +525,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -616,10 +572,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -638,10 +591,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -685,10 +635,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -707,10 +654,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -754,10 +698,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -776,10 +717,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -826,10 +764,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -848,10 +783,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -898,10 +830,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -920,10 +849,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -972,10 +898,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -994,10 +917,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1041,10 +961,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -1063,10 +980,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1109,10 +1023,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -1131,10 +1042,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1181,10 +1089,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -1203,10 +1108,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1253,10 +1155,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -1288,10 +1187,7 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1365,10 +1261,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -1387,10 +1280,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1467,10 +1357,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -1489,10 +1376,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "fc15493b-5142-4b3f-a137-31dd28b7b6c1"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1561,10 +1445,7 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "fc15493b-5142-4b3f-a137-31dd28b7b6c1"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -1595,10 +1476,7 @@
           "text": "shounic trenches (USA Chicago)",
           "value": "45.62.160.71:27015"
         },
-        "datasource": {
-          "type": "grafana-clickhouse-datasource",
-          "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-        },
+        "datasource": "ClickHouse",
         "definition": "select distinct(address) as endpoint, server_name from a2s.info",
         "hide": 0,
         "includeAll": false,

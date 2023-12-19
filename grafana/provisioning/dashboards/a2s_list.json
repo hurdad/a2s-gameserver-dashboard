@@ -23,10 +23,7 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -76,10 +73,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -98,10 +92,7 @@
       "type": "bargauge"
     },
     {
-      "datasource": {
-        "type": "grafana-clickhouse-datasource",
-        "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-      },
+      "datasource": "ClickHouse",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -147,10 +138,7 @@
       "pluginVersion": "10.0.3",
       "targets": [
         {
-          "datasource": {
-            "type": "grafana-clickhouse-datasource",
-            "uid": "c4cf28b9-8307-47e1-804e-c3c4a57cd25f"
-          },
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {

@@ -21,10 +21,10 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource
     restart: unless-stopped
-    network_mode: host
+    ports:
+      - '3000:3000'
     depends_on:
       - clickhouse
-
   clickhouse:
     build:
       context: ./clickhouse
@@ -37,8 +37,6 @@ services:
     volumes:
       - clickhouse_data:/var/lib/clickhouse
       - clickhouse_log:/var/log/clickhouse-server
-      #- ./clickhouse/config.xml:/etc/clickhouse-server/config.d/config.xml
-
   a2s-loader:
     build:
       context: ./a2s-loader
