@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-
+import os
 import asyncio
 from a2s import ainfo, aplayers
 from clickhouse_driver import Client
 import time
 import logging
+import json
 import signal
 
 m_shutdown = 0  # global shutdown variable
@@ -19,54 +20,30 @@ def receive_signal(signalNumber, frame):
     return
 
 
-async def get_server_info(address):
+async def get_server_info(address, timeout):
     try:
-        info = await ainfo(address, timeout=1)
+        info = await ainfo(address=(address[0], address[1]), timeout=timeout)
     except Exception as e:
-        print(f"An error occurred while querying {address}: {e}")
+        logger.error(f"An error occurred while querying {address}: {e}")
         return address, None
     return address, info
 
 
-async def get_player_info(address):
+async def get_player_info(address, timeout):
     try:
-        info = await aplayers(address, timeout=1)
+        info = await aplayers(address=(address[0], address[1]), timeout=timeout)
     except Exception as e:
-        print(f"An error occurred while querying {address}: {e}")
+        logger.error(f"An error occurred while querying {address}: {e}")
         return address, None
     return address, info
 
 
-async def process():
+async def process(conf, servers_to_query):
     # Connect to ClickHouse server
-    client = Client(host='localhost', port=9001, database='a2s')
-
-    # List of server addresses to query
-    servers_to_query = [
-        ('45.62.160.71', 27015),
-        ('91.216.250.10', 27015),
-        ('91.216.250.15', 27015),
-        ('91.216.250.30', 27015),
-        ('91.216.250.12', 27015),
-        ('91.216.250.55', 27015),
-        ('91.216.250.13', 27015),
-        ('91.216.250.31', 27015),
-        ('91.216.250.193', 27015),
-        ('91.216.250.11', 27015),
-        ('91.216.250.54', 27015),
-        ('91.216.250.20', 27015),
-        ('91.216.250.17', 27015),
-        ('91.216.250.40', 27015),
-        ('91.216.250.37', 27015),
-        ('91.216.250.52', 27015),
-        ('91.216.250.18', 27015),
-        ('91.216.250.160', 27015),
-        ('91.216.250.21', 27015),
-        ('91.216.250.22', 27015),
-    ]
+    client = Client(host=conf["CLICKHOUSE_HOST"], port=int(conf["CLICKHOUSE_PORT"]), database='a2s')
 
     # Create tasks to query server info for each address
-    tasks = [get_server_info(address) for address in servers_to_query]
+    tasks = [get_server_info(address, conf["TIMEOUT"]) for address in servers_to_query]
 
     # Gather and run all tasks concurrently
     results = await asyncio.gather(*tasks)
@@ -102,7 +79,7 @@ async def process():
     logger.info('info inserted {}'.format(len(info_data_batch)))
 
     # Create tasks to query server info for each address
-    tasks = [get_player_info(address) for address in servers_to_query]
+    tasks = [get_player_info(address, conf["TIMEOUT"]) for address in servers_to_query]
 
     # Gather and run all tasks concurrently
     results = await asyncio.gather(*tasks)
@@ -129,7 +106,31 @@ async def process():
     logger.info('players inserted {}'.format(len(player_data_batch)))
 
 
+def config_from_env():
+    config = {}
+
+    config["CLICKHOUSE_HOST"] = os.environ.get("CLICKHOUSE_HOST") if os.environ.get(
+        "CLICKHOUSE_HOST") is not None else "localhost"
+
+    config["CLICKHOUSE_PORT"] = int(os.environ.get("CLICKHOUSE_PORT")) if os.environ.get(
+        "CLICKHOUSE_PORT") is not None else 9000
+
+    config["INTERVAL"] = int(os.environ.get("INTERVAL")) if os.environ.get(
+        "INTERVAL") is not None else 5
+
+    config["TIMEOUT"] = int(os.environ.get("TIMEOUT")) if os.environ.get(
+        "TIMEOUT") is not None else 1
+
+    config["SERVERS_FILE"] = os.environ.get("SERVERS_FILE") if os.environ.get(
+        "SERVERS_FILE") is not None else "servers.json"
+
+    return config
+
+
 if __name__ == "__main__":
+    # get config from ENV
+    conf = config_from_env()
+
     # configure logging
     logging.basicConfig(format="%(asctime)s [%(name)s:%(lineno)d][%(funcName)s][%(levelname)s] %(message)s")
 
@@ -137,9 +138,19 @@ if __name__ == "__main__":
     signal.signal(signal.SIGHUP, receive_signal)
     signal.signal(signal.SIGINT, receive_signal)
 
+    # Open the JSON file
+    file = open(conf["SERVERS_FILE"], 'r')
+    servers_to_query = json.load(file)
+    file.close()
+
     # Run the main coroutine
     while not m_shutdown:
-        asyncio.run(process())
-        time.sleep(5)
+        try:
+            asyncio.run(process(conf, servers_to_query))
+        except Exception as e:
+            logger.error(f"An error occurred : {e}")
+
+        # sleep for INTERVAL
+        time.sleep(conf["INTERVAL"])
 
     print('Exiting..')

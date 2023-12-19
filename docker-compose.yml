@@ -1,15 +1,15 @@
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+    clickhouse_data: {}
+    clickhouse_log: {}
+    grafana_data: {}
+
 services:
-
-  a2s-loader:
-    build:
-      context: ./a2s-loader
-      dockerfile: Dockerfile
-    container_name: a2s-loader
-    network_mode: host
-    restart: always
-
   grafana:
-    image: grafana/grafana:10.0.3
+    image: grafana/grafana:10.2.2
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -22,13 +22,32 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource
     restart: unless-stopped
     network_mode: host
+    depends_on:
+      - clickhouse
 
   clickhouse:
-    image: clickhouse/clickhouse-server:23.10.3.5
+    build:
+      context: ./clickhouse
+      dockerfile: Dockerfile
     container_name: clickhouse
-    network_mode: host
     restart: always
+    ports:
+      - "9001:9000"
+      - "8123:8123"
     volumes:
       - clickhouse_data:/var/lib/clickhouse
       - clickhouse_log:/var/log/clickhouse-server
-      - ./clickhouse/config.xml:/etc/clickhouse-server/config.d/config.xml
+      #- ./clickhouse/config.xml:/etc/clickhouse-server/config.d/config.xml
+
+  a2s-loader:
+    build:
+      context: ./a2s-loader
+      dockerfile: Dockerfile
+    container_name: a2s-loader
+    restart: always
+    environment:
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_PORT=9000
+      - TIMEOUT=1
+    depends_on:
+      - clickhouse

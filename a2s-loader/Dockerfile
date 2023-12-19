@@ -15,5 +15,8 @@ COPY . /app
 # Make sure venv is not in docker image
 RUN rm -rf venv
 
+# Set the stop signal to SIGINT
+STOPSIGNAL SIGINT
+
 # run main.py
 CMD ["python3", "main.py"]
