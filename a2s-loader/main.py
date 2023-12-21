@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import os
 import asyncio
+from datetime import datetime
 from a2s import ainfo, aplayers
 from clickhouse_driver import Client
 import time
 import logging
-import json
 import signal
 
 m_shutdown = 0  # global shutdown variable
@@ -52,6 +52,9 @@ async def process(conf):
     # Execute the query
     servers_to_query = client.execute(query)
 
+    # Get current timestamp to use for the timestamp ClickHouse Column
+    current_timestamp = datetime.now()
+
     # Create tasks to query server info for each address
     tasks = [get_server_info(address, conf["TIMEOUT"]) for address in servers_to_query]
 
@@ -65,6 +68,7 @@ async def process(conf):
         info = r[1]
         if info:
             info_data = {
+                "timestamp": current_timestamp,
                 "address": ":".join(map(str, address)),
                 "server_name": info.server_name,
                 "map_name": info.map_name,
@@ -83,10 +87,10 @@ async def process(conf):
 
     # batch insert into clickhouse
     client.execute(
-        query='INSERT INTO a2s.info (address, server_name, map_name, game, player_count, max_players, bot_count, server_type, platform, password_protected, vac_enabled, version, ping) VALUES',
+        query='INSERT INTO a2s.info (timestamp, address, server_name, map_name, game, player_count, max_players, bot_count, server_type, platform, password_protected, vac_enabled, version, ping) VALUES',
         params=info_data_batch
     )
-    logger.info('info inserted {}'.format(len(info_data_batch)))
+    logger.debug('info inserted {}'.format(len(info_data_batch)))
 
     # Create tasks to query server info for each address
     tasks = [get_player_info(address, conf["TIMEOUT"]) for address in servers_to_query]
@@ -102,6 +106,7 @@ async def process(conf):
         if players:
             for p in players:
                 player_data = {
+                    "timestamp": current_timestamp,
                     "address": ":".join(map(str, address)),
                     "name": p.name.replace("'", "''"),
                     "score": p.score,
@@ -110,10 +115,10 @@ async def process(conf):
 
     # batch insert into clickhouse
     client.execute(
-        query='INSERT INTO a2s.players (address, name, score, duration) VALUES',
+        query='INSERT INTO a2s.players (timestamp, address, name, score, duration) VALUES',
         params=player_data_batch
     )
-    logger.info('players inserted {}'.format(len(player_data_batch)))
+    logger.debug('players inserted {}'.format(len(player_data_batch)))
 
 
 def config_from_env():
@@ -131,7 +136,6 @@ def config_from_env():
     config["TIMEOUT"] = int(os.environ.get("TIMEOUT")) if os.environ.get(
         "TIMEOUT") is not None else 1
 
-
     return config
 
 
@@ -148,12 +152,18 @@ if __name__ == "__main__":
 
     # Run the main coroutine
     while not m_shutdown:
+        # start time
+        start_time = time.time()
         try:
             asyncio.run(process(conf))
         except Exception as e:
             logger.error(f"An error occurred : {e}")
 
-        # sleep for INTERVAL
-        time.sleep(conf["INTERVAL"])
+        # calculate execution time
+        end_time = time.time()
+        execution_time = end_time - start_time
+
+        # sleep for INTERVAL - execution time
+        time.sleep(conf["INTERVAL"] - execution_time)
 
     print('Exiting..')

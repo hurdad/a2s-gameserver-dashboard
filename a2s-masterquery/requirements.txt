@@ -1,3 +1,2 @@
 python-valve
-asyncio
 clickhouse_driver
