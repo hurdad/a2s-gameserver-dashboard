@@ -49,3 +49,13 @@ services:
       - TIMEOUT=1
     depends_on:
       - clickhouse
+  a2s-masterquery:
+    build:
+      context: ./a2s-masterquery
+      dockerfile: Dockerfile
+    container_name: a2s-masterquery
+    environment:
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_PORT=9000
+    depends_on:
+      - clickhouse

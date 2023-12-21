@@ -1,5 +1,14 @@
 CREATE DATABASE IF NOT EXISTS a2s;
 
+CREATE TABLE IF NOT EXISTS a2s.servers (
+	timestamp DateTime default NOW(),
+	ip String,
+	port UInt16
+)
+ENGINE = MergeTree
+ORDER BY (timestamp, ip, port)
+TTL timestamp + toIntervalDay(1);
+
 CREATE TABLE IF NOT EXISTS a2s.info (
     timestamp DateTime DEFAULT now(),
     address LowCardinality(String),
@@ -20,11 +29,11 @@ ENGINE = MergeTree
 ORDER BY (timestamp, address)
 TTL timestamp + toIntervalDay(7);
 
-CREATE TABLE IF NOT EXISTS  a2s.players (
+CREATE TABLE IF NOT EXISTS a2s.players (
     timestamp DateTime DEFAULT now(),
     address LowCardinality(String),
     name String,
-    score UInt32,
+    score Int32,
     duration Float32
 )
 ENGINE = MergeTree

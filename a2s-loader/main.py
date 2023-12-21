@@ -38,9 +38,19 @@ async def get_player_info(address, timeout):
     return address, info
 
 
-async def process(conf, servers_to_query):
+async def process(conf):
     # Connect to ClickHouse server
     client = Client(host=conf["CLICKHOUSE_HOST"], port=int(conf["CLICKHOUSE_PORT"]), database='a2s')
+
+    # query for servers
+    query = '''
+        SELECT ip, port
+        FROM a2s.servers s
+        GROUP BY ip, port
+    '''
+
+    # Execute the query
+    servers_to_query = client.execute(query)
 
     # Create tasks to query server info for each address
     tasks = [get_server_info(address, conf["TIMEOUT"]) for address in servers_to_query]
@@ -121,8 +131,6 @@ def config_from_env():
     config["TIMEOUT"] = int(os.environ.get("TIMEOUT")) if os.environ.get(
         "TIMEOUT") is not None else 1
 
-    config["SERVERS_FILE"] = os.environ.get("SERVERS_FILE") if os.environ.get(
-        "SERVERS_FILE") is not None else "servers.json"
 
     return config
 
@@ -138,15 +146,10 @@ if __name__ == "__main__":
     signal.signal(signal.SIGHUP, receive_signal)
     signal.signal(signal.SIGINT, receive_signal)
 
-    # Open the JSON file
-    file = open(conf["SERVERS_FILE"], 'r')
-    servers_to_query = json.load(file)
-    file.close()
-
     # Run the main coroutine
     while not m_shutdown:
         try:
-            asyncio.run(process(conf, servers_to_query))
+            asyncio.run(process(conf))
         except Exception as e:
             logger.error(f"An error occurred : {e}")
 
