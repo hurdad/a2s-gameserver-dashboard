@@ -1,7 +1,7 @@
 # a2s-gameserver-dashboard
 
 ## Overview
-This project creates Grafana Dashboard from A2S Query Game Server Data via ClickHouse Backend Database
+This project creates Grafana Dashboards from A2S Query Game Server Data via ClickHouse Backend Database
 
 ### Quick Start
  - Start docker compose
