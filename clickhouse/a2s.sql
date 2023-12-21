@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS a2s.servers (
 )
 ENGINE = MergeTree
 ORDER BY (timestamp, ip, port)
-TTL timestamp + toIntervalDay(1);
+TTL timestamp + INTERVAL 6 HOUR
+SETTINGS merge_with_ttl_timeout = 60;
 
 CREATE TABLE IF NOT EXISTS a2s.info (
     timestamp DateTime DEFAULT now(),
