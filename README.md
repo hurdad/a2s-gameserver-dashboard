@@ -18,5 +18,7 @@ docker compose up -d
  - Open Dashboards Folder A2S
 
 ### Dashboard Screenshots
-![Screenshot](a2s_list.png)
-![Screenshot](a2s_server.png)
+#### A2S Server List
+![Screenshot](a2s_server_list.png)
+#### A2s Server Summary
+![Screenshot](a2s_server_1.png)
