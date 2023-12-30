@@ -16,3 +16,7 @@ docker compose up -d
  - Open http://localhost:3000
  - Login with admin/admin
  - Open Dashboards Folder A2S
+
+### Dashboard Screenshots
+![Screenshot](a2s_list.png)
+![Screenshot](a2s_server.png)
