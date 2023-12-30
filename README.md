@@ -8,8 +8,8 @@ This project creates Grafana Dashboards from A2S Query Game Server Data via Clic
 ```commandline
 docker compose up -d
 ```
- - Execute ```./runmasterquery.sh``` to populate servers
- - add ```runmastserquery.sh``` to crontab to keep servers updated hourly  ```crontab -e```:
+ - Execute ```./runmasterquery.sh``` to populate servers once clickhouse is up.
+ - Add ```runmasterquery.sh``` to crontab to keep servers updated hourly  ```crontab -e```:
 ```
 0 * * * * /home/user/git/a2s-gameserver-dashboard/runmasterquery.sh
 ```

@@ -131,7 +131,7 @@ def config_from_env():
         "CLICKHOUSE_PORT") is not None else 9000
 
     config["INTERVAL"] = int(os.environ.get("INTERVAL")) if os.environ.get(
-        "INTERVAL") is not None else 5
+        "INTERVAL") is not None else 10
 
     config["TIMEOUT"] = int(os.environ.get("TIMEOUT")) if os.environ.get(
         "TIMEOUT") is not None else 1

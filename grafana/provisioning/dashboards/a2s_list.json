@@ -157,7 +157,7 @@
                   {
                     "targetBlank": true,
                     "title": "",
-                    "url": "http://bequite.lan:3000/d/a37ba67e-515d-4e0c-a3b1-89390badb0aa/a2s-server?orgId=1&refresh=5s&var-address=${__value.raw}"
+                    "url": "d/a37ba67e-515d-4e0c-a3b1-89390badb0aa/a2s-server?orgId=1&refresh=10s&var-address=${__data.fields[2]}"
                   }
                 ]
               }
@@ -219,6 +219,38 @@
                 "value": "center"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Bots"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 70
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Max Players"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              }
+            ]
           }
         ]
       },
@@ -243,15 +275,15 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": false,
-            "displayName": "Ping"
+            "desc": true,
+            "displayName": "Players"
           }
         ]
       },
       "pluginVersion": "10.2.2",
       "targets": [
         {
-		  "datasource": "ClickHouse",
+          "datasource": "ClickHouse",
           "format": 1,
           "meta": {
             "builderOptions": {
@@ -261,7 +293,7 @@
             }
           },
           "queryType": "sql",
-          "rawSql": "select  server_name as `Server Name`, game as Game, address as Address, map_name as Map, CONCAT(player_count , '/',max_players) as Players, player_count/max_players * 100 as Capacity, ping*1000 as Ping from a2s.info \r\nwhere timestamp = (select max(timestamp) from a2s.info  where $__timeFilter(timestamp))\r\norder by server_name ASC\r\n",
+          "rawSql": "SELECT  server_name AS `Server Name`, game AS Game, address AS Address, map_name AS Map, player_count-bot_count AS Players, bot_count as Bots, max_players AS `Max Players`, (player_count-bot_count)/max_players * 100 AS Capacity, ping * 1000 AS Ping \r\nFROM a2s.info \r\nWHERE timestamp = (SELECT max(timestamp) from a2s.info WHERE $__timeFilter(timestamp))\r\n\r\n",
           "refId": "A",
           "selectedFormat": 4
         }
@@ -270,7 +302,7 @@
       "type": "table"
     }
   ],
-  "refresh": "5s",
+  "refresh": "10s",
   "schemaVersion": 38,
   "tags": [],
   "templating": {
@@ -284,6 +316,6 @@
   "timezone": "",
   "title": "A2S Server List",
   "uid": "d0298253-93f8-42cf-a893-3d01b2061d86",
-  "version": 15,
+  "version": 5,
   "weekStart": ""
 }
