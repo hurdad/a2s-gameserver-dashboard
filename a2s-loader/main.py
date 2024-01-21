@@ -105,8 +105,9 @@ async def process(conf):
         players = r[1]
         if players:
             for p in players:
-                # ignore scores larger than 100k
-                if int(p.score) < 100000:
+                score = int(p.score)
+                # ignore scores larger than 100k and non negative scores
+                if 0 <= score < 100000:
                     # build clickhouse player dict
                     player_data = {
                         "timestamp": current_timestamp,
