@@ -105,13 +105,16 @@ async def process(conf):
         players = r[1]
         if players:
             for p in players:
-                player_data = {
-                    "timestamp": current_timestamp,
-                    "address": ":".join(map(str, address)),
-                    "name": p.name.replace("'", "''"),
-                    "score": p.score,
-                    "duration": p.duration}
-                player_data_batch.append(player_data)
+                # ignore scores larger than 100k
+                if int(p.score) < 100000:
+                    # build clickhouse player dict
+                    player_data = {
+                        "timestamp": current_timestamp,
+                        "address": ":".join(map(str, address)),
+                        "name": p.name.replace("'", "''"),
+                        "score": p.score,
+                        "duration": p.duration}
+                    player_data_batch.append(player_data)
 
     # batch insert into clickhouse
     client.execute(
